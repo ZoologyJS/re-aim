@@ -1,0 +1,228 @@
+<template>
+  <teleport to=".buddy-list">
+    <div class="toolbar">
+      <div class="my-aim-toolbar">My AIM</div>
+      <div class="people-toolbar">People</div>
+      <div class="help-toolbar">Help</div>
+    </div>
+    <div class="online-text">Online Friends</div>
+    <div class="friends">
+      <div 
+        class="buddies-text"
+        @click="toggleBuddyCollapse">
+          {{ buddiesCollapsed 
+              ? "▸" 
+              : "▾" }} Buddies (3/5)
+      </div>
+      <div 
+        class="buddy-online" 
+        v-for="buddy in buddyList" 
+        :key="buddy"
+        @click="initChatWindow">
+          {{ buddy.online && !buddiesCollapsed 
+              ? buddy.username 
+              : null }}
+      </div>
+      <div 
+        class="offline-text" 
+        @click="toggleOfflineCollapse">
+          {{ offlineCollapsed 
+              ? "▸" 
+              : "▾" }} Offline (2/5)
+      </div>
+      <div 
+        class="buddy-offline" 
+        v-for="buddy in buddyList" 
+        :key="buddy">
+          {{ !buddy.online && !offlineCollapsed 
+              ? buddy.username 
+              : null }}
+      </div>
+    </div>
+  </teleport>
+</template>
+
+<script>
+import { mitter } from "../eventHub.js";
+import WinBox from "winbox/src/js/winbox.js";
+import "winbox/src/css/winbox.css";
+
+export default {
+  name: 'AimBuddyList',
+  components: {
+
+  },
+  data() {
+    return {
+      buddiesCollapsed: false,
+      offlineCollapsed: false,
+      buddyList: [
+        {
+          username: "SmarterChild",
+          online: true,
+        },
+        {
+          username: "garfield231",
+          online: true,
+        },
+        {
+          username: "senatoralbatross",
+          online: true,
+        },
+        {
+          username: "cubsfan126",
+          online: false,
+        },
+        {
+          username: "avril16th",
+          online: false,
+        },
+     ]
+    }
+  },
+  methods: {
+    initChatWindow() {
+      mitter.emit("initChat", () => {});
+    },
+    preventSubmit(e) {
+      e.preventDefault();
+    },
+    toggleBuddyCollapse() {
+      this.buddiesCollapsed = !this.buddiesCollapsed;
+    },
+    toggleOfflineCollapse() {
+      this.offlineCollapsed = !this.offlineCollapsed;
+    },
+  },
+  created() {
+    const buddyList = new WinBox({ 
+      title: "Buddy List",
+      background: "#0367FD",
+      height: "600vh",
+      minheight: "600vh",
+      width: "270px",
+      minwidth: "270px",
+      right: 50,
+      x: "right",
+      y: "center",
+      border: 5,
+      html: '<div class="buddy-list"></div>'
+    });
+    const aolLogo = document.createElement("img");
+    aolLogo.src = require("../assets/aol-icon.png");
+    aolLogo.style.height = "15px";
+    aolLogo.style.float = "left";
+    aolLogo.style.margin = "9px 5px 0px 0px";
+    buddyList.dom.querySelector(".wb-title").appendChild(aolLogo);
+  },
+}
+</script>
+
+<style > 
+  * {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  /* Buddy List */
+  .buddy-list {
+    height: 100%;
+    padding: 0px 5px 5px 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    background-color: #ECE8D6;
+  }
+
+  .friends {
+    height: 100%;
+    width: 100%;
+    flex: 1 1 auto;
+    /* padding: 5px; */
+    border: 3px solid;
+    border-style: inset;
+    border-radius: 3px;
+    background-color: white;
+  }
+
+  .online-text, .buddies-text, .offline-text, .buddy-online, .buddy-offline  {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-right: auto;
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 3px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .online-text::selection, .buddies-text::selection, .offline-text::selection {
+      color: none;
+      background: none;
+  }
+
+  .buddies-text {
+    padding-left: 5px;
+  }
+
+  .offline-text {
+    padding-left: 5px;
+    color: grey;
+    font-weight: normal;
+  }
+
+  .online-text {
+    padding: 5px 0px 0px 2px;
+  }
+
+  .buddy-online {
+    width: 100%;
+    padding-left: 35px;
+    font-weight: inherit;
+  }
+
+  .buddy-online:hover {
+    background-color: rgb(243, 243, 243);
+  }
+
+  .buddy-offline {
+    width: 100%;
+    color: grey;
+    padding-left: 35px;
+    font-weight: inherit;
+  }
+
+  .buddy-offline:hover {
+    background-color: rgb(243, 243, 243);
+  }
+
+  /* Toolbar */
+  .toolbar {
+    width: 100%;
+    margin-right: auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    font-size: 12px;
+    border-bottom: 1px solid;
+    border-style: none none outset none;
+  }
+
+  .toolbar > * {
+    cursor: pointer;
+    padding: 2px 11px 2px 2px;
+  }
+
+  .toolbar > *:hover {
+    background-color: lightgrey;
+  }
+
+  .wb-title {
+    font-weight: bold;
+  }
+
+</style>

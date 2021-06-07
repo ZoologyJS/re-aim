@@ -1,0 +1,143 @@
+<template>
+  <teleport :to="getIdClass">
+      <div ref="chatLog" class="chat-log">
+        <div v-for="msg in messages" :key="msg">
+          <AimMessage 
+            :username="msg.username" 
+            :message="msg.message"
+            :userColor="msg.color"  
+          />
+        </div>
+      </div>
+      <div ref="chatboxText" contenteditable="true" @keydown.enter="sendMessage" class="chatbox-text"></div>
+      <!-- <div 
+        ref="chatboxSend"
+        class="chatbox-send"
+        @click="preventSubmit"
+      /> -->
+  </teleport>
+</template>
+
+<script>
+import AimMessage from "./AimMessage";
+import { mitter } from "../eventHub";
+import WinBox from "winbox/src/js/winbox.js";
+import "winbox/src/css/winbox.css";
+
+export default {
+  name: 'AimChat',
+  components: {
+    AimMessage
+  },
+  props: ["chatId"],
+  data() {
+    return {
+      coreChatInitiated: false,
+      messages: [
+        {
+          username: "Chris",
+          message: "What a beautiful day it is",
+          color: "blue"
+        },
+        {
+          username: "SmarterChild",
+          message: "I agree with that!",
+          color: "red"
+        },
+        {
+          username: "Chris",
+          message: "I would like a glass of water",
+          color: "blue"
+        },
+     ]
+    }
+  },
+  methods: {
+    preventSubmit(e) {
+      e.preventDefault();
+    },
+    sendMessage(e) {
+      e.preventDefault();
+      this.messages.push({
+        username: "Chris",
+        message: e.target.innerText,
+        color: "blue"
+      })
+      e.target.innerText = "";
+      this.$refs.chatLog.scrollTop = (this.$refs.chatLog.scrollHeight + 100);
+    },
+    initWinBox() {
+      const chatIdInj = `<div class="chat-template${this.chatId} chat-template"></div>`;
+      new WinBox("AOL Instant Messenger", { 
+        background: "#0367FD",
+        height: "285px",
+        minheight: "285px",
+        width: "450px",
+        minwidth: "450px",
+        left: 100,
+        top: 100,
+        border: 5,
+        html: chatIdInj
+      });
+      document.querySelector("#winbox-1").style.display = "none";
+    },
+  },
+  computed: {
+    getIdClass() {
+      return ".chat-template" + this.chatId;
+    }
+  },
+  created() {
+    if (!this.coreChatInitiated) {
+      console.log("box created")
+      this.initWinBox()
+    }
+    this.coreChatInitiated = true;
+  },
+  mounted() {
+    // mitter.on("initChat", name => { 
+    //   this.initWinBox();
+    // }); 
+  } 
+}
+</script>
+
+<style>
+  .winbox {
+    border-radius: 5px;
+  }
+
+  .chat-template {
+    height: 100%;
+    min-height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    background-color: #ECE8D6;
+  }
+
+  .chatbox-text {
+    height: 40%;
+    flex: 3 2 auto;
+    outline: 0px solid transparent;
+  }
+
+  .chat-log {
+    height: 100%;
+    flex: 7 3 auto;
+    margin-bottom: 10px;
+    overflow: scroll;
+  }
+
+  .chatbox-text, .chat-log {
+    width: 100%;
+    border: 3px solid;
+    border-style: inset;
+    border-radius: 3px;
+    background-color: white;
+  }
+</style>

@@ -1,26 +1,43 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <AimChat v-for="chat in chats" :key="chat" :chatId="chat" ref="AimChat" />
+  <AimBuddyList ref="AimBuddyList" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AimChat from './components/AimChat.vue'
+import AimBuddyList from './components/AimBuddyList.vue'
+import { mitter } from "./eventHub.js";
+// import { mixy } from "./mixin.js";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    AimChat,
+    AimBuddyList
+  },
+  data() {
+    return {
+      chats: [1]
+    }
+  },
+  methods: {
+    initChat() {
+      this.chats.push(this.chats[this.chats.length + 1]);
+    }
+  },
+  mounted() {
+    mitter.on("initChat", () => {
+      console.log("inc")
+      this.initChat();
+    })
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  body {
+    height: 100vh;
+    background-image: url("~@/assets/windows-background.jpeg");
+  }
+
 </style>
