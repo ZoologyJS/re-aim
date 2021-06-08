@@ -1,5 +1,12 @@
 <template>
   <teleport :to="getIdClass">
+      <div class="toolbar">
+        <div class="my-aim-toolbar">File</div>
+        <div class="people-toolbar">Edit</div>
+        <div class="help-toolbar">Insert</div>
+        <div class="help-toolbar">People</div>
+      </div>  
+      <div class="chat-list-divider"></div>
       <div ref="chatLog" class="chat-log">
         <div v-for="msg in messages" :key="msg">
           <AimMessage 
@@ -10,6 +17,7 @@
         </div>
       </div>
       <div ref="chatboxText" contenteditable="true" @keydown.enter="sendMessage" class="chatbox-text"></div>
+      <img class="chat-bottom-toolbar" src="../assets/chat-bottom-toolbar.png" />
       <!-- <div 
         ref="chatboxSend"
         class="chatbox-send"
@@ -70,8 +78,8 @@ export default {
       const chatIdInj = `<div class="chat-template${this.chatId} chat-template"></div>`;
       const chatBox = new WinBox(`Instant Message - ${this.username}`, { 
         background: "#0367FD",
-        height: "285px",
-        minheight: "285px",
+        height: "320px",
+        minheight: "320px",
         width: "450px",
         minwidth: "450px",
         left: 100,
@@ -121,7 +129,7 @@ export default {
   .chat-template {
     height: 100%;
     min-height: 100%;
-    padding: 10px;
+    padding: 0px 10px 10px 10px;
     box-sizing: border-box;
     border-radius: 5px;
     display: flex;
@@ -134,13 +142,14 @@ export default {
 
   .chatbox-text {
     height: 40%;
-    flex: 3 2 auto;
+    flex: 1 2 auto;
     outline: 0px solid transparent;
   }
 
   .chat-log {
     height: 100%;
-    flex: 7 3 auto;
+    flex: 1 3 auto;
+    /* margin-top: 10px; */
     margin-bottom: 10px;
     overflow: scroll;
   }
@@ -151,5 +160,21 @@ export default {
     border-style: inset;
     border-radius: 3px;
     background-color: white;
+  }
+
+  .chat-list-divider {
+    width: 100%;
+    margin-bottom: 5px;
+    border-bottom: 1px solid;
+    border-style: outset none none none;
+  }
+
+  .chat-bottom-toolbar {
+    margin-top: 5px;
+    width: 425px;
+  }
+
+  .chat-bottom-toolbar:hover {
+    cursor: pointer;
   }
 </style>

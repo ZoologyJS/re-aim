@@ -120,7 +120,7 @@ export default {
     });
     const aolLogo = document.createElement("img");
     aolLogo.src = require("../assets/aol-icon.png");
-    aolLogo.style.height = "15px";
+    aolLogo.style.height = "17px";
     aolLogo.style.float = "left";
     aolLogo.style.margin = "9px 5px 0px 0px";
     buddyList.dom.querySelector(".wb-title").appendChild(aolLogo);
@@ -165,6 +165,7 @@ export default {
 
   .buddy-list-divider {
     width: 100%;
+    height: 5px;
     border-bottom: 1px solid;
     border-style: none none outset none;
   }
@@ -235,9 +236,14 @@ export default {
     border-style: none none outset none;
   }
 
-  .toolbar > * {
+  .toolbar > *:not(:first-child) {
     cursor: pointer;
-    padding: 2px 11px 2px 2px;
+    padding: 2px 6px 2px 6px;
+  }
+
+  .toolbar > *:first-child {
+    cursor: pointer;
+    padding: 2px 7px 2px 0px;
   }
 
   .toolbar > *:hover {
