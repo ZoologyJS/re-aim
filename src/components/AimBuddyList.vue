@@ -108,7 +108,15 @@ export default {
       x: "right",
       y: "center",
       border: 5,
-      html: '<div class="buddy-list"></div>'
+      html: '<div class="buddy-list"></div>',
+      onfocus: function(){
+        this.setBackground("#0367FD");
+        this.removeClass("unfocused-window");
+        },
+      onblur: function(){
+        this.setBackground("#7C9CE2");
+        this.addClass("unfocused-window");
+      },
     });
     const aolLogo = document.createElement("img");
     aolLogo.src = require("../assets/aol-icon.png");
@@ -236,8 +244,9 @@ export default {
     background-color: lightgrey;
   }
 
-  .wb-title {
-    font-weight: bold;
+  .toolbar > *::selection {
+    color: none;
+    background: none;
   }
 
 </style>

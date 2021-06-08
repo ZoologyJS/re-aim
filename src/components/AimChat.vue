@@ -68,7 +68,7 @@ export default {
     },
     initWinBox() {
       const chatIdInj = `<div class="chat-template${this.chatId} chat-template"></div>`;
-      const chatBox = new WinBox(`Instant Messenger - ${this.username}`, { 
+      const chatBox = new WinBox(`Instant Message - ${this.username}`, { 
         background: "#0367FD",
         height: "285px",
         minheight: "285px",
@@ -77,7 +77,16 @@ export default {
         left: 100,
         top: 100,
         border: 5,
-        html: chatIdInj
+        html: chatIdInj,
+        onfocus: function(){
+          this.setBackground("#0367FD");
+          this.removeClass("unfocused-window");
+        },
+        onblur: function(){
+          this.setBackground("#7C9CE2");
+          this.addClass("unfocused-window");
+        },
+
       });
       const chatLogo = document.createElement("img");
       chatLogo.src = require("../assets/wave-icon.png");
@@ -114,6 +123,7 @@ export default {
     min-height: 100%;
     padding: 10px;
     box-sizing: border-box;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
