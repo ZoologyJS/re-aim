@@ -5,6 +5,8 @@
       <div class="people-toolbar">People</div>
       <div class="help-toolbar">Help</div>
     </div>
+    <img class="buddy-list-logo" src="../assets/aim-bl2.png" />
+    <div class="buddy-list-divider"></div>
     <div class="online-text">Online Friends</div>
     <div class="friends">
       <div 
@@ -81,8 +83,8 @@ export default {
     }
   },
   methods: {
-    initChatWindow() {
-      mitter.emit("initChat", () => {});
+    initChatWindow(e) {
+      mitter.emit("initChat", e.target.innerText);
     },
     preventSubmit(e) {
       e.preventDefault();
@@ -138,13 +140,24 @@ export default {
 
   .friends {
     height: 100%;
-    width: 100%;
+    width: 99%;
     flex: 1 1 auto;
     /* padding: 5px; */
     border: 3px solid;
     border-style: inset;
-    border-radius: 3px;
+    border-radius: 2px;
     background-color: white;
+  }
+
+  .buddy-list-logo {
+    margin: 10px 0px;
+    height: 22%;
+  }
+
+  .buddy-list-divider {
+    width: 100%;
+    border-bottom: 1px solid;
+    border-style: none none outset none;
   }
 
   .online-text, .buddies-text, .offline-text, .buddy-online, .buddy-offline  {

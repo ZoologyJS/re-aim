@@ -1,5 +1,5 @@
 <template>
-  <AimChat v-for="chat in chats" :key="chat" :chatId="chat" ref="AimChat" />
+  <AimChat v-for="chat in chats" :key="chat" :username="chat.username" :chatId="chat.id" ref="AimChat" />
   <AimBuddyList ref="AimBuddyList" />
 </template>
 
@@ -17,18 +17,24 @@ export default {
   },
   data() {
     return {
-      chats: [1]
+      chats: [
+        {
+          id: 1, 
+          username: "ekjgekrt"
+        }
+      ]
     }
   },
   methods: {
-    initChat() {
-      this.chats.push(this.chats[this.chats.length + 1]);
+    initChat(username) {
+      const nextId = this.chats[this.chats.length-1].id + 1;
+      this.chats.push({ id: nextId, username: username });
     }
   },
   mounted() {
-    mitter.on("initChat", () => {
-      console.log("inc")
-      this.initChat();
+    mitter.on("initChat", (payload) => {
+      console.log(payload)
+      this.initChat(payload);
     })
   }
 }

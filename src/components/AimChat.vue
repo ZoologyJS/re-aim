@@ -29,7 +29,7 @@ export default {
   components: {
     AimMessage
   },
-  props: ["chatId"],
+  props: [ "chatId", "username" ],
   data() {
     return {
       coreChatInitiated: false,
@@ -68,7 +68,7 @@ export default {
     },
     initWinBox() {
       const chatIdInj = `<div class="chat-template${this.chatId} chat-template"></div>`;
-      new WinBox("AOL Instant Messenger", { 
+      new WinBox(`Instant Messenger - ${this.username}`, { 
         background: "#0367FD",
         height: "285px",
         minheight: "285px",
@@ -89,7 +89,6 @@ export default {
   },
   created() {
     if (!this.coreChatInitiated) {
-      console.log("box created")
       this.initWinBox()
     }
     this.coreChatInitiated = true;

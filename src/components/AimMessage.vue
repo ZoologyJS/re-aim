@@ -10,7 +10,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+    * {
+      font-family: "Times New Roman", Times, serif !important;
+    }
     .username {
         font-weight: bold;
     }
