@@ -179,7 +179,7 @@ export default {
     width: 424px;
   }
 
-  .chat-bottom-toolbar:hover, chat-styling-bar:hover {
+  .chat-bottom-toolbar:hover, .chat-styling-bar:hover {
     cursor: pointer;
   }
 </style>
