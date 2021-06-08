@@ -68,7 +68,7 @@ export default {
     },
     initWinBox() {
       const chatIdInj = `<div class="chat-template${this.chatId} chat-template"></div>`;
-      new WinBox(`Instant Messenger - ${this.username}`, { 
+      const chatBox = new WinBox(`Instant Messenger - ${this.username}`, { 
         background: "#0367FD",
         height: "285px",
         minheight: "285px",
@@ -79,6 +79,12 @@ export default {
         border: 5,
         html: chatIdInj
       });
+      const chatLogo = document.createElement("img");
+      chatLogo.src = require("../assets/wave-icon.png");
+      chatLogo.style.height = "1.2em";
+      chatLogo.style.float = "left";
+      chatLogo.style.margin = "9px 5px 0px 0px";
+      chatBox.dom.querySelector(".wb-title").appendChild(chatLogo);
       document.querySelector("#winbox-1").style.display = "none";
     },
   },
@@ -102,9 +108,6 @@ export default {
 </script>
 
 <style>
-  .winbox {
-    border-radius: 5px;
-  }
 
   .chat-template {
     height: 100%;

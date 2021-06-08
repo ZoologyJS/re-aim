@@ -99,7 +99,7 @@ export default {
   created() {
     const buddyList = new WinBox({ 
       title: "Buddy List",
-      background: "#0367FD",
+      background: "#0567f7",
       height: "600vh",
       minheight: "600vh",
       width: "270px",
@@ -135,7 +135,7 @@ export default {
     justify-content: space-between;
     align-content: center;
     align-items: center;
-    background-color: #ECE8D6;
+    background-color: #ECE9D8;
   }
 
   .friends {
@@ -152,6 +152,7 @@ export default {
   .buddy-list-logo {
     margin: 10px 0px;
     height: 22%;
+    border-radius: 1px;
   }
 
   .buddy-list-divider {
@@ -164,8 +165,8 @@ export default {
     font-family: Arial, Helvetica, sans-serif;
     margin-right: auto;
     font-weight: bold;
-    font-size: 12px;
     margin-bottom: 3px;
+    font-size: 12px;
     cursor: pointer;
     text-decoration: none;
   }
@@ -186,6 +187,7 @@ export default {
   }
 
   .online-text {
+    font-size: 13px;
     padding: 5px 0px 0px 2px;
   }
 
