@@ -6,7 +6,7 @@
         <div class="help-toolbar">Insert</div>
         <div class="help-toolbar">People</div>
       </div>  
-      <div class="chat-list-divider"></div>
+      <!-- <div class="chat-list-divider"></div> -->
       <div ref="chatLog" class="chat-log">
         <div v-for="msg in messages" :key="msg">
           <AimMessage 
@@ -16,6 +16,7 @@
           />
         </div>
       </div>
+      <img class="chat-styling-bar" src="../assets/styling-bar.png" />
       <div ref="chatboxText" contenteditable="true" @keydown.enter="sendMessage" class="chatbox-text"></div>
       <img class="chat-bottom-toolbar" src="../assets/chat-bottom-toolbar.png" />
       <!-- <div 
@@ -150,7 +151,7 @@ export default {
     height: 100%;
     flex: 1 3 auto;
     /* margin-top: 10px; */
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     overflow: scroll;
   }
 
@@ -170,11 +171,15 @@ export default {
   }
 
   .chat-bottom-toolbar {
-    margin-top: 5px;
     width: 425px;
   }
 
-  .chat-bottom-toolbar:hover {
+  .chat-styling-bar {
+    margin: 2px 0px;
+    width: 424px;
+  }
+
+  .chat-bottom-toolbar:hover, chat-styling-bar:hover {
     cursor: pointer;
   }
 </style>
