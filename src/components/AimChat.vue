@@ -165,14 +165,12 @@ export default {
 
   .chat-list-divider {
     width: 100%;
-    /* margin-top: 10px; */
     margin-bottom: 5px;
     border-bottom: 1px solid;
     border-style: none none inset none;
   }
 
   .chat-bottom-toolbar {
-    /* padding-bottom: 10px; */
     width: 430px;
     position: relative;
     right: 1px;
@@ -189,7 +187,7 @@ export default {
     cursor: pointer;
   }
 
-    /* Toolbar */
+  /* Toolbar */
   .chat-toolbar {
     width: 100%;
     margin-right: auto;

@@ -41,6 +41,7 @@
               : null }}
       </div>
     </div>
+    <img src="../assets/buddy-bottom-toolbar.png" class="bottom-buddy-toolbar">
   </teleport>
 </template>
 
@@ -72,7 +73,7 @@ export default {
           online: true,
         },
         {
-          username: "cubsfan126",
+          username: "vjetpack",
           online: false,
         },
         {
@@ -106,8 +107,8 @@ export default {
       background: "#0567f7",
       height: "600vh",
       minheight: "600vh",
-      width: "270px",
-      minwidth: "270px",
+      width: "220px",
+      minwidth: "220px",
       right: 50,
       x: "right",
       y: "center",
@@ -205,7 +206,7 @@ export default {
   }
 
   .buddy-online {
-    width: 100%;
+    /* width: 100%; */
     padding-left: 35px;
     font-weight: inherit;
   }
@@ -215,7 +216,7 @@ export default {
   }
 
   .buddy-offline {
-    width: 100%;
+    /* width: 100%; */
     color: grey;
     padding-left: 35px;
     font-weight: inherit;
@@ -223,6 +224,20 @@ export default {
 
   .buddy-offline:hover {
     background-color: rgb(243, 243, 243);
+  }
+
+  .bottom-buddy-toolbar {
+    width: 165px;
+    margin: 2px 0px;
+  }
+
+  .bottom-buddy-toolbar:hover {
+    cursor: pointer;
+  }
+
+  .bottom-buddy-toolbar::selection {
+    color: none;
+    background: none;
   }
 
   /* Toolbar */

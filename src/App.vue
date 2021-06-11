@@ -82,6 +82,7 @@ export default {
     font-weight: bold;
     font-size: 15px;
     cursor: default;
+    color: rgb(240, 240, 240);
   }
 
   .unfocused-window {
