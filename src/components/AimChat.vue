@@ -29,6 +29,9 @@
         class="chatbox-send"
         @click="preventSubmit"
       /> -->
+      <audio class="send-message-notification">
+        <source src="../assets/send-message-notification.mp3" type="audio/mpeg">
+      </audio>
   </teleport>
 </template>
 
@@ -67,6 +70,7 @@ export default {
       // Resets the chat typing window and scrolls to the bottom of the chat log
       e.target.innerText = "";
       this.$refs.chatLog.scrollTop = (this.$refs.chatLog.scrollHeight + 100);
+      document.querySelector(".send-message-notification").play();
     },
     // Creates a WinBox for a new chat room instance
     initWinBox() {
@@ -171,6 +175,7 @@ export default {
   }
 
   .chat-bottom-toolbar {
+    margin-top: 13px;
     width: 430px;
     position: relative;
     right: 1px;

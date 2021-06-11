@@ -59,28 +59,7 @@ export default {
     return {
       buddiesCollapsed: false,
       offlineCollapsed: false,
-      buddyList: [
-        {
-          username: "SmarterChild",
-          online: true,
-        },
-        {
-          username: "garfield231",
-          online: true,
-        },
-        {
-          username: "senatoralbatross",
-          online: true,
-        },
-        {
-          username: "vjetpack",
-          online: false,
-        },
-        {
-          username: "avril16th",
-          online: false,
-        },
-     ]
+      buddyList: this.$store.getters.getBuddyList
     }
   },
   methods: {

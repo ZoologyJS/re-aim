@@ -3,7 +3,29 @@ import Vuex from "vuex";
 export default new Vuex.Store({
   state: {
     initiatedChats: {},
-    currUser: "snake"
+    currUser: "snake",
+    buddyList: [
+      {
+        username: "SmarterChild",
+        online: true,
+      },
+      {
+        username: "garfield231",
+        online: true,
+      },
+      {
+        username: "senatoralbatross",
+        online: true,
+      },
+      {
+        username: "vjetpack",
+        online: false,
+      },
+      {
+        username: "avril16th",
+        online: false,
+      },
+   ]
   },
   // "Commit" a mutation
   mutations: {
@@ -28,6 +50,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    getChatHistory: (state) => state.initiatedChats
+    getChatHistory: (state) => state.initiatedChats,
+    getBuddyList: (state) => state.buddyList
   }
 });
