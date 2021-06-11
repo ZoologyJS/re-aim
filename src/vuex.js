@@ -1,12 +1,7 @@
-// import Vue from "vue";
 import Vuex from "vuex";
-
-// Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    currentJoke: "This is a joke",
-    setOfJokes: [],
     initiatedChats: {},
     currUser: "snake"
   },
@@ -16,13 +11,14 @@ export default new Vuex.Store({
       state.setOfJokes.push(payload);
     },
     initChat(state, payload) {
-        const { userToChat } = payload;
+        const { userToChat, winBox } = payload;
         if (!state.initiatedChats[userToChat]) {
-            console.log("Chat Initiated!")
             state.initiatedChats[userToChat] = {
                 username: userToChat,
                 id: btoa(userToChat),
                 timestamp: (new Date()).toString(),
+                active: true,
+                // windowRef: winBox,
                 messageHistory: []
             }
         }
@@ -31,16 +27,18 @@ export default new Vuex.Store({
         // state.initiatedChats.push({username: payload.username})
     },
     messageLogger(state, payload) {
-        console.log("Message Logger called", state.initiatedChats[payload.recipient].messageHistory)
-        state.initiatedChats[payload.recipient].messageHistory.push(payload);
+      console.log("Message Logger called", state.initiatedChats[payload.recipient].messageHistory)
+      state.initiatedChats[payload.recipient].messageHistory.push(payload);
+    },
+    toggleChatActivity(state, payload) {
+        state.initiatedChats[payload.recipient].active = payload.activity;
     }
+    // toggleWindowState(state, payload) {
+    //     console.log(payload)
+    //     state.initiatedChats[payload.username].windowRef = payload.payload;
+    // }
   },
   getters: {
-    getCurrentJoke: state => state.currentJoke,
-    grabJokeList: state => state.setOfJokes,
-    getChatHistory: (state) => {
-        console.log("getChatHistory from state called")
-        return state.initiatedChats
-    }
+    getChatHistory: (state) => state.initiatedChats
   }
 });

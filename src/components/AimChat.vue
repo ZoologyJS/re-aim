@@ -61,13 +61,7 @@ export default {
         recipient: this.username,
         message: e.target.innerText,
         foreign: false
-      });  
-
-      // this.messages.push({
-      //   username: "Chris",
-      //   message: e.target.innerText,
-      //   color: "blue"
-      // })
+      });
       
       e.target.innerText = "";
       this.$refs.chatLog.scrollTop = (this.$refs.chatLog.scrollHeight + 100);
@@ -84,14 +78,17 @@ export default {
         top: 100,
         border: 5,
         html: chatIdInj,
-        onfocus: function(){
+        onfocus: function() {
           this.setBackground("#0367FD");
           this.removeClass("unfocused-window");
         },
-        onblur: function(){
+        onblur: function() {
           this.setBackground("#7C9CE2");
           this.addClass("unfocused-window");
         },
+        onclose: function() {
+          this.$store.commit("toggleChatActivity", { recipient: this.username, activity: false });
+        }.bind(this)
 
       });
       const chatLogo = document.createElement("img");
@@ -100,7 +97,7 @@ export default {
       chatLogo.style.float = "left";
       chatLogo.style.margin = "9px 5px 0px 0px";
       chatBox.dom.querySelector(".wb-title").appendChild(chatLogo);
-      document.querySelector("#winbox-1").style.display = "none";
+      // this.$store.commit("toggleWindowState", { username: this.username, payload: chatBox });
     },
   },
   computed: {
@@ -113,10 +110,7 @@ export default {
     },
   },
   created() {
-    if (!this.coreChatInitiated) {
       this.initWinBox()
-    }
-    this.coreChatInitiated = true;
   },
   mounted() {
     // mitter.on("initChat", name => { 
@@ -151,8 +145,6 @@ export default {
   .chat-log {
     height: 100%;
     flex: 1 3 auto;
-    /* margin-top: 10px; */
-    /* margin-bottom: 10px; */
     overflow: scroll;
   }
 

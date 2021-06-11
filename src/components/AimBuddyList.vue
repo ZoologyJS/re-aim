@@ -85,6 +85,8 @@ export default {
   methods: {
     initChatWindow(e) {
       const userToChat = e.target.innerText;
+      console.log(this.$store.getters.getChatHistory[userToChat]?.active)
+      if (this.$store.getters.getChatHistory[userToChat]?.active) return;
       this.$store.commit("initChat", { userToChat });  
       mitter.emit("initChat", userToChat);
     },
