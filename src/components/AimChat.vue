@@ -8,16 +8,21 @@
       </div>  
       <!-- <div class="chat-list-divider"></div> -->
       <div ref="chatLog" class="chat-log">
-        <div v-for="msg in messages" :key="msg">
+        <div v-for="msg in getChatHistory" :key="msg.message">
           <AimMessage 
-            :username="msg.username" 
+            :username="msg.foreign ? msg.recipient : msg.username" 
             :message="msg.message"
-            :userColor="msg.color"  
+            :userColor="msg.foreign ? 'red' : 'blue'"
           />
         </div>
       </div>
       <img class="chat-styling-bar" src="../assets/styling-bar.png" />
-      <div ref="chatboxText" contenteditable="true" @keydown.enter="sendMessage" class="chatbox-text"></div>
+      <div 
+        class="chatbox-text"
+        ref="chatboxText" 
+        contenteditable="true" 
+        @keydown.enter="sendMessage">
+      </div>
       <img class="chat-bottom-toolbar" src="../assets/chat-bottom-toolbar.png" />
       <!-- <div 
         ref="chatboxSend"
@@ -42,23 +47,6 @@ export default {
   data() {
     return {
       coreChatInitiated: false,
-      messages: [
-        {
-          username: "Chris",
-          message: "What a beautiful day it is",
-          color: "blue"
-        },
-        {
-          username: "SmarterChild",
-          message: "I agree with that!",
-          color: "red"
-        },
-        {
-          username: "Chris",
-          message: "I would like a glass of water",
-          color: "blue"
-        },
-     ]
     }
   },
   methods: {
@@ -67,11 +55,20 @@ export default {
     },
     sendMessage(e) {
       e.preventDefault();
-      this.messages.push({
-        username: "Chris",
+
+      this.$store.commit("messageLogger", { 
+        username: this.$store.state.currUser,
+        recipient: this.username,
         message: e.target.innerText,
-        color: "blue"
-      })
+        foreign: false
+      });  
+
+      // this.messages.push({
+      //   username: "Chris",
+      //   message: e.target.innerText,
+      //   color: "blue"
+      // })
+      
       e.target.innerText = "";
       this.$refs.chatLog.scrollTop = (this.$refs.chatLog.scrollHeight + 100);
     },
@@ -109,7 +106,11 @@ export default {
   computed: {
     getIdClass() {
       return ".chat-template" + this.chatId;
-    }
+    },
+    getChatHistory() {
+      console.log("getChatHistory called from AimChat componenet", this.$store.getters.getChatHistory)
+      return this.$store.getters.getChatHistory[this.username]?.messageHistory;
+    },
   },
   created() {
     if (!this.coreChatInitiated) {

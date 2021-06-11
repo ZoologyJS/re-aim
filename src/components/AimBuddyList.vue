@@ -84,7 +84,9 @@ export default {
   },
   methods: {
     initChatWindow(e) {
-      mitter.emit("initChat", e.target.innerText);
+      const userToChat = e.target.innerText;
+      this.$store.commit("initChat", { userToChat });  
+      mitter.emit("initChat", userToChat);
     },
     preventSubmit(e) {
       e.preventDefault();

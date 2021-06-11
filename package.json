@@ -11,6 +11,7 @@
     "mitt": "^2.1.0",
     "tiny-emitter": "^2.1.0",
     "vue": "^3.0.0",
+    "vuex": "^4.0.1",
     "winbox": "^0.2.0"
   },
   "devDependencies": {
@@ -23,4 +24,4 @@
     "last 2 versions",
     "not dead"
   ]
-}
+} 

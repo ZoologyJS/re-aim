@@ -1,5 +1,8 @@
 <template>
-  <div class="message-container"><span :style="{ color: userColor }" class="username">{{ username }}: </span><span class="message">{{ message }}</span></div>
+  <div class="message-container">
+    <span :style="{ color: userColor }" class="username">{{ username }}: </span>
+    <span class="message">{{ message }}</span>
+  </div>
 </template>
 
 <script>

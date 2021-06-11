@@ -33,7 +33,7 @@ export default {
   },
   mounted() {
     mitter.on("initChat", (payload) => {
-      console.log(payload)
+      // console.log(payload)
       this.initChat(payload);
     })
   }
