@@ -23,9 +23,6 @@ export default {
   methods: {
     initChat(username) {
       console.log(this.chats)
-      // for (let item of this.chats) {
-      //   if (item.username === username) return;
-      // }
       if (this.chats.length) {
         const nextId = this.chats[this.chats.length-1].id + 1;
         this.chats.push({ id: nextId, username });

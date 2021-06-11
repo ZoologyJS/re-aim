@@ -242,19 +242,20 @@ export default {
 
   .toolbar > *:not(:first-child) {
     cursor: pointer;
-    padding: 2px 6px 2px 6px;
+    padding: 2px 6px 4px 6px;
   }
 
   .toolbar > *:first-child {
     cursor: pointer;
-    padding: 2px 7px 2px 0px;
+    padding: 2px 7px 4px 0px;
   }
 
   .toolbar > *:hover {
     background-color: lightgrey;
   }
 
-  .toolbar > *::selection {
+  /* No highlighting decoration for elements */
+  .buddy-offline::selection, .buddy-online::selection, .toolbar > *::selection {
     color: none;
     background: none;
   }

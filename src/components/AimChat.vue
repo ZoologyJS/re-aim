@@ -1,12 +1,12 @@
 <template>
   <teleport :to="getIdClass">
-      <div class="toolbar">
+      <div class="chat-toolbar">
         <div class="my-aim-toolbar">File</div>
         <div class="people-toolbar">Edit</div>
         <div class="help-toolbar">Insert</div>
         <div class="help-toolbar">People</div>
       </div>  
-      <!-- <div class="chat-list-divider"></div> -->
+      <div class="chat-list-divider"></div>
       <div ref="chatLog" class="chat-log">
         <div v-for="msg in getChatHistory" :key="msg.message">
           <AimMessage 
@@ -56,6 +56,7 @@ export default {
     sendMessage(e) {
       e.preventDefault();
 
+      // Handles notifying the Vuex store of new sent messages
       this.$store.commit("messageLogger", { 
         username: this.$store.state.currUser,
         recipient: this.username,
@@ -63,9 +64,11 @@ export default {
         foreign: false
       });
       
+      // Resets the chat typing window and scrolls to the bottom of the chat log
       e.target.innerText = "";
       this.$refs.chatLog.scrollTop = (this.$refs.chatLog.scrollHeight + 100);
     },
+    // Creates a WinBox for a new chat room instance
     initWinBox() {
       const chatIdInj = `<div class="chat-template${this.chatId} chat-template"></div>`;
       const chatBox = new WinBox(`Instant Message - ${this.username}`, { 
@@ -91,13 +94,13 @@ export default {
         }.bind(this)
 
       });
+      // Below options help add a custom window title with icon
       const chatLogo = document.createElement("img");
       chatLogo.src = require("../assets/wave-icon.png");
       chatLogo.style.height = "1.2em";
       chatLogo.style.float = "left";
       chatLogo.style.margin = "9px 5px 0px 0px";
       chatBox.dom.querySelector(".wb-title").appendChild(chatLogo);
-      // this.$store.commit("toggleWindowState", { username: this.username, payload: chatBox });
     },
   },
   computed: {
@@ -140,6 +143,7 @@ export default {
     height: 40%;
     flex: 1 2 auto;
     outline: 0px solid transparent;
+    font-family: "Times New Roman", Times, serif !important;
   }
 
   .chat-log {
@@ -149,6 +153,7 @@ export default {
   }
 
   .chatbox-text, .chat-log {
+    padding: 2px 5px;
     width: 100%;
     border: 3px solid;
     border-style: inset;
@@ -158,21 +163,57 @@ export default {
 
   .chat-list-divider {
     width: 100%;
+    /* margin-top: 10px; */
     margin-bottom: 5px;
     border-bottom: 1px solid;
-    border-style: outset none none none;
+    border-style: none none inset none;
   }
 
   .chat-bottom-toolbar {
-    width: 425px;
+    /* padding-bottom: 10px; */
+    width: 435px;
+    position: relative;
+    right: 2px;
   }
 
   .chat-styling-bar {
-    margin: 2px 0px;
-    width: 424px;
+    position: relative;
+    width: 435px; 
+    right: 2px;
+    margin: 1px 0px;
   }
 
   .chat-bottom-toolbar:hover, .chat-styling-bar:hover {
     cursor: pointer;
   }
+
+    /* Toolbar */
+  .chat-toolbar {
+    width: 100%;
+    margin-right: auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    font-size: 12px;
+    border-bottom: 1px solid;
+    border-style: none none outset none;
+  }
+
+  .chat-toolbar > *:not(:first-child) {
+    cursor: pointer;
+    padding: 2px 6px 4px 6px;
+  }
+
+  .chat-toolbar > *:first-child {
+    cursor: pointer;
+    padding: 2px 7px 4px 0px;
+  }
+
+  .chat-toolbar > *:hover {
+    background-color: lightgrey;
+  }
+
 </style>

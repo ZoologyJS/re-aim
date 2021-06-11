@@ -26,7 +26,7 @@ export default {
     }
 
     .message-container {
-        padding: 3px 5px;
+        padding: 2px 2px;
     }
 
 </style>
