@@ -128,7 +128,7 @@ export default {
   .chat-template {
     height: 100%;
     min-height: 100%;
-    padding: 0px 10px 10px 10px;
+    padding: 0px 5px 3px 5px;
     box-sizing: border-box;
     border-radius: 5px;
     display: flex;
@@ -150,6 +150,7 @@ export default {
     height: 100%;
     flex: 1 3 auto;
     overflow: scroll;
+    box-sizing: border-box;
   }
 
   .chatbox-text, .chat-log {
@@ -158,6 +159,7 @@ export default {
     border: 3px solid;
     border-style: inset;
     border-radius: 3px;
+    box-sizing: border-box;
     background-color: white;
   }
 
@@ -171,16 +173,16 @@ export default {
 
   .chat-bottom-toolbar {
     /* padding-bottom: 10px; */
-    width: 435px;
+    width: 430px;
     position: relative;
-    right: 2px;
+    right: 1px;
   }
 
   .chat-styling-bar {
     position: relative;
-    width: 435px; 
-    right: 2px;
-    margin: 1px 0px;
+    width: 430px; 
+    right: 1px;
+    margin: 4px 0px 1px 0px;
   }
 
   .chat-bottom-toolbar:hover, .chat-styling-bar:hover {
