@@ -1,3 +1,3 @@
-# re-aim
+# re-Aim
 
-Its aim, but like, real again.
+An AOL Instant Messanger clone for the browser. Features a full "old school" Windows XP operating system environment.
